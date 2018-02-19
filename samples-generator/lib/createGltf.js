@@ -11,10 +11,7 @@ var combine = Cesium.combine;
 var defaultValue = Cesium.defaultValue;
 var defined = Cesium.defined;
 
-var addPipelineExtras = gltfPipeline.addPipelineExtras;
-var getBinaryGltf = gltfPipeline.getBinaryGltf;
-var loadGltfUris = gltfPipeline.loadGltfUris;
-var processGltf = gltfPipeline.Pipeline.processJSON;
+var gltfToGlb = gltfPipeline.gltfToGlb;
 
 module.exports = createGltf;
 
@@ -393,7 +390,8 @@ function createGltf(options) {
     }
 
     // TODO : add back quantize, compressTextureCoordinates, encodeNormals, and textureCompressionOptions
-    // TODO : afterwards, convert to glb and return that
+
+    return gltfToGlb(gltf)
 }
 
 function getMinMax(array, components, start, length) {
