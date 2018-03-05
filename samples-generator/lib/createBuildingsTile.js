@@ -28,7 +28,6 @@ var scratchMatrix = new Matrix4();
  * @param {Matrix4} [options.transform=Matrix4.IDENTITY] A transform to bake into the tile, for example a transform into WGS84.
  * @param {Boolean} [options.optimizeForCesium=false] Optimize the glTF for Cesium by using the sun as a default light source.
  * @param {Boolean} [options.relativeToCenter=false] Use the Cesium_RTC extension.
- * @param {Boolean} [options.khrMaterialsCommon=false] Save glTF with the KHR_materials_common extension.
  * @param {Boolean} [options.quantization=false] Save glTF with quantized attributes.
  * @param {Boolean} [options.useVertexColors=false] Bake materials as vertex colors.
  * @param {Boolean} [options.deprecated1=false] Save the b3dm with the deprecated 20-byte header and the glTF with the BATCHID semantic.
@@ -47,7 +46,6 @@ function createBuildingsTile(options) {
     var tileTransform = defaultValue(options.transform, Matrix4.IDENTITY);
     var optimizeForCesium = options.optimizeForCesium;
     var relativeToCenter = options.relativeToCenter;
-    var khrMaterialsCommon = options.khrMaterialsCommon;
     var quantization = options.quantization;
     var useVertexColors = options.useVertexColors;
     var deprecated1 = options.deprecated1;
@@ -96,7 +94,6 @@ function createBuildingsTile(options) {
         useBatchIds : useBatchIds,
         optimizeForCesium : optimizeForCesium,
         relativeToCenter : relativeToCenter,
-        khrMaterialsCommon : khrMaterialsCommon,
         quantization : quantization,
         deprecated : deprecated1 || deprecated2,
         textureCompressionOptions : textureCompressionOptions,

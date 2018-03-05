@@ -1,0 +1,146 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 672,
+      "type": "SCALAR",
+      "min": [
+        0
+      ],
+      "max": [
+        113
+      ],
+      "normalized": false
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 114,
+      "min": [
+        -1.1363259553909302,
+        0.5537300109863281,
+        0.1847810000181198
+      ],
+      "max": [
+        -1.0393439531326294,
+        0.6507120132446289,
+        0.2817629873752594
+      ],
+      "type": "VEC3",
+      "normalized": false
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1368,
+      "componentType": 5126,
+      "count": 114,
+      "type": "VEC3",
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "normalized": false
+    }
+  ],
+  "asset": {
+    "generator": "OBJ2GLTF",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "byteLength": 4080,
+      "uri": "0.bin"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 2736,
+      "byteOffset": 0,
+      "target": 34962,
+      "byteStride": 12
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1344,
+      "byteOffset": 2736,
+      "target": 34963
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8,
+          0.24657,
+          0.026813,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE",
+      "doubleSided": false
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 1,
+            "NORMAL": 2
+          },
+          "indices": 0,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "mesh": 0
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

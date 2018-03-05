@@ -208,14 +208,13 @@ var promises = [
     createBatchedColorsTranslucent(),
     createBatchedColorsMix(),
     createBatchedTextured(),
-    createBatchedCompressedTextures(),
+    //createBatchedCompressedTextures(),
     createBatchedWithBoundingSphere(),
     createBatchedWithTransformBox(),
     createBatchedWithTransformSphere(),
     createBatchedWithTransformRegion(),
     createBatchedNoBatchIds(),
-    createBatchedWithKHRMaterialsCommon(),
-    createBatchedWithQuantization(),
+    //createBatchedWithQuantization(),
     createBatchedWGS84(),
     createBatchedDeprecated1(),
     createBatchedDeprecated2(),
@@ -434,13 +433,6 @@ function createBatchedNoBatchIds() {
     return saveBatchedTileset('BatchedNoBatchIds', tileOptions);
 }
 
-function createBatchedWithKHRMaterialsCommon() {
-    var tileOptions = {
-        khrMaterialsCommon : true
-    };
-    return saveBatchedTileset('BatchedWithKHRMaterialsCommon', tileOptions);
-}
-
 function createBatchedWithQuantization() {
     var tileOptions = {
         quantization : true
@@ -493,11 +485,10 @@ function createBatchedExpiration() {
 
 function createBatchedWithVertexColors() {
     var buildingOptions = clone(buildingTemplate);
-    buildingOptions.diffuseType = 'color';
+    buildingOptions.baseColorType = 'color';
     var tileOptions = {
         buildingOptions : buildingOptions,
-        useVertexColors : true,
-        khrMaterialsCommon : true
+        useVertexColors : true
     };
     return saveBatchedTileset('BatchedWithVertexColors', tileOptions);
 }

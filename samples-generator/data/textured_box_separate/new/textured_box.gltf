@@ -1,0 +1,307 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 24,
+      "min": [
+        -10,
+        -10,
+        -10
+      ],
+      "max": [
+        10,
+        10,
+        10
+      ],
+      "type": "VEC3",
+      "name": "accessor_0",
+      "normalized": false
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 288,
+      "componentType": 5126,
+      "count": 24,
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "type": "VEC3",
+      "name": "accessor_1",
+      "normalized": false
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 576,
+      "componentType": 5126,
+      "count": 24,
+      "min": [
+        0,
+        0
+      ],
+      "max": [
+        1,
+        1
+      ],
+      "type": "VEC2",
+      "name": "accessor_2",
+      "normalized": false
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 36,
+      "min": [
+        0
+      ],
+      "max": [
+        23
+      ],
+      "type": "SCALAR",
+      "name": "accessor_3",
+      "normalized": false
+    }
+  ],
+  "asset": {
+    "generator": "obj2gltf",
+    "version": "2.0",
+    "premultipliedAlpha": true
+  },
+  "buffers": [
+    {
+      "byteLength": 840,
+      "uri": "0.bin"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 768,
+      "byteOffset": 0,
+      "target": 34962,
+      "name": "bufferView_0",
+      "byteStride": 12
+    },
+    {
+      "buffer": 0,
+      "byteLength": 72,
+      "byteOffset": 768,
+      "target": 34963,
+      "name": "bufferView_1"
+    }
+  ],
+  "images": [
+    {
+      "name": "Cesium_Logo_Flat",
+      "uri": "Cesium_Logo_Flat.png"
+    }
+  ],
+  "materials": [
+    {
+      "technique": 0,
+      "values": {
+        "ambient": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "diffuse": {
+          "index": 0
+        },
+        "emission": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "specular": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "shininess": 96.078431,
+        "transparency": 1
+      },
+      "name": "Material"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "mesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "rootNode",
+      "mesh": 0
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9729,
+      "wrapS": 10497,
+      "wrapT": 10497,
+      "name": "sampler"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "scene"
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0,
+      "name": "texture_Cesium_Logo_Flat"
+    }
+  ],
+  "programs": [
+    {
+      "attributes": [
+        "a_position",
+        "a_normal",
+        "a_texcoord_0"
+      ],
+      "fragmentShader": 1,
+      "vertexShader": 0,
+      "name": "program0"
+    }
+  ],
+  "shaders": [
+    {
+      "type": 35633,
+      "name": "vertexShader0",
+      "uri": "vertexShader0.glsl"
+    },
+    {
+      "type": 35632,
+      "name": "fragmentShader0",
+      "uri": "fragmentShader0.glsl"
+    }
+  ],
+  "techniques": [
+    {
+      "attributes": {
+        "a_position": "position",
+        "a_normal": "normal",
+        "a_texcoord_0": "texcoord_0"
+      },
+      "parameters": {
+        "modelViewMatrix": {
+          "semantic": "MODELVIEW",
+          "type": 35676
+        },
+        "projectionMatrix": {
+          "semantic": "PROJECTION",
+          "type": 35676
+        },
+        "normalMatrix": {
+          "semantic": "MODELVIEWINVERSETRANSPOSE",
+          "type": 35675
+        },
+        "ambient": {
+          "type": 35666
+        },
+        "diffuse": {
+          "type": 35678
+        },
+        "emission": {
+          "type": 35666
+        },
+        "specular": {
+          "type": 35666
+        },
+        "shininess": {
+          "type": 5126
+        },
+        "transparency": {
+          "type": 5126
+        },
+        "position": {
+          "semantic": "POSITION",
+          "type": 35665
+        },
+        "normal": {
+          "semantic": "NORMAL",
+          "type": 35665
+        },
+        "texcoord_0": {
+          "semantic": "TEXCOORD_0",
+          "type": 35664
+        }
+      },
+      "program": 0,
+      "states": {
+        "enable": [
+          2884,
+          2929
+        ]
+      },
+      "uniforms": {
+        "u_modelViewMatrix": "modelViewMatrix",
+        "u_projectionMatrix": "projectionMatrix",
+        "u_normalMatrix": "normalMatrix",
+        "u_ambient": "ambient",
+        "u_diffuse": "diffuse",
+        "u_emission": "emission",
+        "u_specular": "specular",
+        "u_shininess": "shininess",
+        "u_transparency": "transparency"
+      },
+      "name": "technique0"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_technique_webgl"
+  ],
+  "extensionsUsed": [
+    "KHR_technique_webgl"
+  ]
+}

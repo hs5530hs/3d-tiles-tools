@@ -72,47 +72,47 @@ function createGltf(options) {
     }
 
     var i;
-    var positionMinMax = getMinMax(positions, 3);
-    var positionLength = positions.length;
-    var positionBuffer = Buffer.alloc(positionLength * sizeOfFloat32);
-    for (i = 0; i < positionLength; ++i) {
-        positionBuffer.writeFloatLE(position[i], i * sizeOfFloat32);
+    var positionsMinMax = getMinMax(positions, 3);
+    var positionsLength = positions.length;
+    var positionsBuffer = Buffer.alloc(positionsLength * sizeOfFloat32);
+    for (i = 0; i < positionsLength; ++i) {
+        positionsBuffer.writeFloatLE(positions[i], i * sizeOfFloat32);
     }
 
     var normalsMinMax = getMinMax(normals, 3);
     var normalsLength = normals.length;
-    var normalBuffer = Buffer.alloc(normalsLength * sizeOfFloat32);
+    var normalsBuffer = Buffer.alloc(normalsLength * sizeOfFloat32);
     for (i = 0; i < normalsLength; ++i) {
-        normalBuffer.writeFloatLE(normals[i], i * sizeOfFloat32);
+        normalsBuffer.writeFloatLE(normals[i], i * sizeOfFloat32);
     }
 
     var uvsMinMax = getMinMax(uvs, 2);
     var uvsLength = uvs.length;
-    var uvBuffer = Buffer.alloc(uvsLength * sizeOfFloat32);
+    var uvsBuffer = Buffer.alloc(uvsLength * sizeOfFloat32);
     for (i = 0; i < uvsLength; ++i) {
-        uvBuffer.writeFloatLE(uvs[i], i * sizeOfFloat32);
+        uvsBuffer.writeFloatLE(uvs[i], i * sizeOfFloat32);
     }
 
     var vertexColorsMinMax;
-    var vertexColorBuffer = Buffer.alloc(0);
+    var vertexColorsBuffer = Buffer.alloc(0);
     if (hasVertexColors) {
         vertexColorsMinMax = getMinMax(vertexColors, 4);
         var vertexColorsLength = vertexColors.length;
-        vertexColorBuffer = Buffer.alloc(vertexColorsLength, sizeOfUint8);
+        vertexColorsBuffer = Buffer.alloc(vertexColorsLength, sizeOfUint8);
         for (i = 0; i < vertexColorsLength; ++i) {
-            vertexColorBuffer.writeUInt8(vertexColors[i], i);
+            vertexColorsBuffer.writeUInt8(vertexColors[i], i);
         }
     }
 
     var batchIdsMinMax;
-    var batchIdBuffer = Buffer.alloc(0);
+    var batchIdsBuffer = Buffer.alloc(0);
     var batchIdSemantic = deprecated ? 'BATCHID' : '_BATCHID';
     if (useBatchIds) {
         batchIdsMinMax = getMinMax(batchIds, 1);
         var batchIdsLength = batchIds.length;
-        batchIdBuffer = Buffer.alloc(batchIdsLength * sizeOfUint16);
+        batchIdsBuffer = Buffer.alloc(batchIdsLength * sizeOfUint16);
         for (i = 0; i < batchIdsLength; ++i) {
-            batchIdBuffer.writeUInt16LE(batchIds[i], i * sizeOfUint16);
+            batchIdsBuffer.writeUInt16LE(batchIds[i], i * sizeOfUint16);
         }
     }
 
@@ -124,12 +124,12 @@ function createGltf(options) {
 
     var vertexCount = mesh.getVertexCount();
 
-    var buffer = Buffer.concat([positionBuffer, normalBuffer, uvBuffer, vertexColorBuffer, batchIdBuffer, indexBuffer]);
+    var buffer = Buffer.concat([positionsBuffer, normalsBuffer, uvsBuffer, vertexColorsBuffer, batchIdsBuffer, indexBuffer]);
     var bufferUri = 'data:application/octet-stream;base64,' + buffer.toString('base64');
     var byteLength = buffer.byteLength;
 
-    var indexAccessors = {};
-    var materials = {};
+    var indexAccessors = [];
+    var materials = [];
     var primitives = [];
 
     var images;
@@ -137,24 +137,24 @@ function createGltf(options) {
     var textures;
 
     var bufferViewIndex = 0;
-    var positionBufferViewIndex = bufferViewIndex++;
-    var normalBufferViewIndex = bufferViewIndex++;
-    var uvBufferViewIndex = bufferViewIndex++;
-    var vertexColorBufferViewIndex = hasVertexColors ? bufferViewIndex++ : 0;
-    var batchIdBufferViewIndex = useBatchIds ? bufferViewIndex++ : 0;
+    var positionsBufferViewIndex = bufferViewIndex++;
+    var normalsBufferViewIndex = bufferViewIndex++;
+    var uvsBufferViewIndex = bufferViewIndex++;
+    var vertexColorsBufferViewIndex = hasVertexColors ? bufferViewIndex++ : 0;
+    var batchIdsBufferViewIndex = useBatchIds ? bufferViewIndex++ : 0;
     var indexBufferViewIndex = bufferViewIndex++;
 
     var byteOffset = 0;
-    var positionBufferByteOffset = byteOffset;
-    byteOffset += positionBuffer.length;
-    var normalBufferByteOffset = byteOffset;
-    byteOffset += normalBuffer.length;
-    var uvBufferByteOffset = byteOffset;
-    byteOffset += uvBuffer.length;
-    var vertexColorBufferByteOffset = byteOffset;
-    byteOffset += hasVertexColors ? vertexColorBuffer.length : 0;
-    var batchIdBufferByteOffset = byteOffset;
-    byteOffset += useBatchIds ? batchIdBuffer.length : 0;
+    var positionsBufferByteOffset = byteOffset;
+    byteOffset += positionsBuffer.length;
+    var normalsBufferByteOffset = byteOffset;
+    byteOffset += normalsBuffer.length;
+    var uvsBufferByteOffset = byteOffset;
+    byteOffset += uvsBuffer.length;
+    var vertexColorsBufferByteOffset = byteOffset;
+    byteOffset += hasVertexColors ? vertexColorsBuffer.length : 0;
+    var batchIdsBufferByteOffset = byteOffset;
+    byteOffset += useBatchIds ? batchIdsBuffer.length : 0;
     var indexBufferByteOffset = byteOffset;
     byteOffset += indexBuffer.length;
 
@@ -215,17 +215,17 @@ function createGltf(options) {
         });
 
         var attributes = {
-            POSITION : positionBufferViewIndex,
-            NORMAL : normalBufferViewIndex,
-            TEXCOORD_0 : uvBufferViewIndex
+            POSITION : positionsBufferViewIndex,
+            NORMAL : normalsBufferViewIndex,
+            TEXCOORD_0 : uvsBufferViewIndex
         };
 
         if (hasVertexColors) {
-            attributes.COLOR_0 = vertexColorBufferViewIndex;
+            attributes.COLOR_0 = vertexColorsBufferViewIndex;
         }
 
         if (useBatchIds) {
-            attributes[batchIdSemantic] = batchIdBufferViewIndex;
+            attributes[batchIdSemantic] = batchIdsBufferViewIndex;
         }
 
         primitives.push({
@@ -238,7 +238,7 @@ function createGltf(options) {
 
     var vertexAccessors = [
         {
-            bufferView : positionBufferViewIndex,
+            bufferView : positionsBufferViewIndex,
             byteOffset : 0,
             byteStride : 0,
             componentType : 5126, // FLOAT
@@ -249,7 +249,7 @@ function createGltf(options) {
             name : 'positions'
         },
         {
-            bufferView : normalBufferViewIndex,
+            bufferView : normalsBufferViewIndex,
             byteOffset : 0,
             byteStride : 0,
             componentType : 5126, // FLOAT
@@ -260,7 +260,7 @@ function createGltf(options) {
             name : 'normals'
         },
         {
-            bufferView : uvBufferViewIndex,
+            bufferView : uvsBufferViewIndex,
             byteOffset : 0,
             byteStride : 0,
             componentType : 5126, // FLOAT
@@ -274,7 +274,7 @@ function createGltf(options) {
 
     if (hasVertexColors) {
         vertexAccessors.accessor_vertexColor = {
-            bufferView : vertexColorBufferViewIndex,
+            bufferView : vertexColorsBufferViewIndex,
             byteOffset : 0,
             byteStride : 0,
             componentType : 5121, // UNSIGNED_BYTE
@@ -288,7 +288,7 @@ function createGltf(options) {
 
     if (useBatchIds) {
         vertexAccessors.push({
-            bufferView : batchIdBufferViewIndex,
+            bufferView : batchIdsBufferViewIndex,
             byteOffset : 0,
             byteStride : 0,
             componentType : 5123, // UNSIGNED_SHORT
@@ -304,20 +304,20 @@ function createGltf(options) {
     var bufferViews = [
         {
             buffer : 0,
-            byteLength : positionBuffer.length,
-            byteOffset : positionBufferByteOffset,
+            byteLength : positionsBuffer.length,
+            byteOffset : positionsBufferByteOffset,
             target : 34962 // ARRAY_BUFFER
         },
         {
             buffer : 0,
-            byteLength : normalBuffer.length,
-            byteOffset : normalBufferByteOffset,
+            byteLength : normalsBuffer.length,
+            byteOffset : normalsBufferByteOffset,
             target : 34962 // ARRAY_BUFFER
         },
         {
             buffer : 0,
-            byteLength : uvBuffer.length,
-            byteOffset : uvBufferByteOffset,
+            byteLength : uvsBuffer.length,
+            byteOffset : uvsBufferByteOffset,
             target : 34962 // ARRAY_BUFFER
         }
     ];
@@ -325,8 +325,8 @@ function createGltf(options) {
     if (hasVertexColors) {
         bufferViews.push({
             buffer : 0,
-            byteLength : vertexColorBuffer.length,
-            byteOffset : vertexColorBufferByteOffset,
+            byteLength : vertexColorsBuffer.length,
+            byteOffset : vertexColorsBufferByteOffset,
             target : 34962 // ARRAY_BUFFER
         });
     }
@@ -334,8 +334,8 @@ function createGltf(options) {
     if (useBatchIds) {
         bufferViews.push({
             buffer : 0,
-            byteLength : batchIdBuffer.length,
-            byteOffset : batchIdBufferByteOffset,
+            byteLength : batchIdsBuffer.length,
+            byteOffset : batchIdsBufferByteOffset,
             target : 34962 // ARRAY_BUFFER
         });
     }
@@ -391,7 +391,7 @@ function createGltf(options) {
 
     // TODO : add back quantize, compressTextureCoordinates, encodeNormals, and textureCompressionOptions
 
-    return gltfToGlb(gltf)
+    return gltfToGlb(gltf);
 }
 
 function getMinMax(array, components, start, length) {
